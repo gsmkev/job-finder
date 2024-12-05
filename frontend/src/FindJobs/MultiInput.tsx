@@ -5,7 +5,8 @@ import { IconSelector } from '@tabler/icons-react';
 const MultiInput = (props:any) => {
     useEffect(() => {
         setData(props.options);
-    }, [])
+    }, [props.options]);
+
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
@@ -33,7 +34,7 @@ const MultiInput = (props:any) => {
   const handleValueRemove = (val: string) =>
     setValue((current) => current.filter((v) => v !== val));
 
-  const values = value.slice(0, 1) .map((item) => (
+  const values = value.slice(0, 1).map((item) => (
     <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
       {item}
     </Pill>
