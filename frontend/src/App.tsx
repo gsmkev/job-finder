@@ -2,9 +2,12 @@ import './App.css';
 import {createTheme, MantineProvider} from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
-import HomePage from "./Pages/HomePage";
-import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+
+import HomePage from "./Pages/HomePage";
+
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
 function App() {
     const theme = createTheme({
@@ -38,13 +41,15 @@ function App() {
         }
     });
     return (
-      <MantineProvider theme={theme}>
-          <BrowserRouter>
-              <Routes>
-                  <Route path={'*'} element={<HomePage/>}/>
-              </Routes>
-          </BrowserRouter>
-      </MantineProvider>
+    <MantineProvider theme={theme}>
+        <BrowserRouter>
+            <Header />
+            <Routes>
+                <Route path={'*'} element={<HomePage/>}/>
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+    </MantineProvider>
     );
 }
 
