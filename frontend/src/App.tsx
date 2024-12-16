@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 import HomePage from "./Pages/HomePage";
 import FindJobs from './Pages/FindJobs';
+import FindTalents from './Pages/FindTalents';
 
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
@@ -49,6 +50,7 @@ function App() {
             <Routes>
                 <Route path={'*'} element={<HomePage/>}/>
                 <Route path={'find-jobs'} element={<FindJobs/>}/>
+                <Route path={'find-talents'} element={<FindTalents/>}/>
             </Routes>
             <Footer />
         </BrowserRouter>
