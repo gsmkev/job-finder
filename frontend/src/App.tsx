@@ -1,5 +1,5 @@
 import './App.css';
-import {createTheme, MantineProvider} from '@mantine/core';
+import {createTheme, Divider, MantineProvider} from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -43,11 +43,15 @@ function App() {
             ],
         },
         fontFamily: 'Poppins, sans-serif',
+        focusRing: 'never',
+        primaryColor: 'bright-sun',
+        primaryShade: 4,
     });
     return (
     <MantineProvider defaultColorScheme='dark' theme={theme}>
         <BrowserRouter>
             <Header />
+            <Divider size="xs" mx={'md'} />
             <Routes>
                 <Route path={'*'} element={<HomePage/>}/>
                 <Route path={'find-jobs'} element={<FindJobs/>}/>
