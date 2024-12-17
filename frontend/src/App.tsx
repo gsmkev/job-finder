@@ -13,6 +13,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import TalentProfile from './Pages/TalentProfile';
 import UploadJobs from './Pages/UploadJobs';
+import JobsDescription from './Pages/JobsDescription';
 
 function App() {
     const theme = createTheme({
@@ -57,6 +58,7 @@ function App() {
             <Routes>
                 <Route path={'*'} element={<HomePage/>}/>
                 <Route path={'find-jobs'} element={<FindJobs/>}/>
+                <Route path={'jobs'} element={<JobsDescription/>}/>
                 <Route path={'upload-jobs'} element={<UploadJobs/>}/>
                 <Route path={'find-talents'} element={<FindTalents/>}/>
                 <Route path={'talent-profile'} element={<TalentProfile/>}/>
