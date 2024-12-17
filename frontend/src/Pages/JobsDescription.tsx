@@ -2,6 +2,7 @@ import { Button } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import JobDescription from "../JobDescription/JobDescription";
+import RecommendedJob from "../JobDescription/RecommendedJob";
 
 const JobsDescription = () => {
     return (
@@ -11,6 +12,7 @@ const JobsDescription = () => {
             </Link>
             <div className="flex gap-5">
                 <JobDescription/>
+                <RecommendedJob/>
             </div>
         </div>
     );
