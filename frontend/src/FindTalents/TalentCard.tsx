@@ -3,8 +3,9 @@ import { IconHeart, IconMapPin } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
 const TalentCard = (props : any) => {
+    const className = props.className || "w-96";
     return (
-        <div className={'bg-mine-shaft-900 p-4 w-96 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400'}>
+        <div className={`bg-mine-shaft-900 p-4 w-96 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400 ${className}`}>
             <div className={'flex justify-between'}>
                 <div className={'flex gap-2 items-center'}>
                     <div className={'p-2 bg-mine-shaft-800 rounded-full'}>
