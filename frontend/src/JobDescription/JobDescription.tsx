@@ -19,7 +19,7 @@ const JobDescription = () => {
                     </div>
                 </div>
                 <div className="flex flex-col gap-2 items-center">
-                    <Link to={'/apply-job'}>
+                    <Link to={'/apply-jobs'}>
                         <Button color="bright-sun.4" size="sm" variant="light">Apply</Button>
                     </Link>
                     <IconBookmark className={'text-bright-sun-400 cursor-pointer'} />
