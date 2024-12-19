@@ -24,17 +24,18 @@ const Company = () => {
                     <IconMapPin className="h-5 w-5" stroke={1.5} /> New York, United States
                 </div>
                 <Divider my={'xl'} />
-                <Tabs variant="outline" radius={'lg'} defaultValue={'about'}>
-                    <Tabs.List className="[&_button]:!text-lg font-semibold mb-5 [&_button[data-active='true']]:text-bright-sun-400">
-                        <Tabs.Tab value="about">About</Tabs.Tab>
-                        <Tabs.Tab value="jobs">Jobs</Tabs.Tab>
-                        <Tabs.Tab value="employees">Employees</Tabs.Tab>
-                    </Tabs.List>
-                    <Tabs.Panel value="about"><About /></Tabs.Panel>
-                    <Tabs.Panel value="jobs"><Jobs /></Tabs.Panel>
-                    <Tabs.Panel value="employees"><Employees /></Tabs.Panel>
-                </Tabs>
-                <div></div>
+                <div>
+                    <Tabs variant="outline" radius={'lg'} defaultValue={'about'}>
+                        <Tabs.List className="[&_button]:!text-lg font-semibold mb-5 [&_button[data-active='true']]:text-bright-sun-400">
+                            <Tabs.Tab value="about">About</Tabs.Tab>
+                            <Tabs.Tab value="jobs">Jobs</Tabs.Tab>
+                            <Tabs.Tab value="employees">Employees</Tabs.Tab>
+                        </Tabs.List>
+                        <Tabs.Panel value="about"><About /></Tabs.Panel>
+                        <Tabs.Panel value="jobs"><Jobs /></Tabs.Panel>
+                        <Tabs.Panel value="employees"><Employees /></Tabs.Panel>
+                    </Tabs>
+                </div>
             </div>
         </div>
     );
