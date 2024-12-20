@@ -12,12 +12,12 @@ const SearchBar = () => {
                 <div className={'text-bright-sun-400 bg-mine-shaft-900 rounded-full p-1 mr-2'}>
                     <IconUserCircle size={20} />
                 </div>
-                <Input variant="unstyled" placeholder="Talent Name" className="[&_input]:!placeholder-mine-shaft-300"/>
+                <Input variant="unstyled" placeholder="Talent Name" className="[&_input]:!placeholder-mine-shaft-300" />
             </div>
             {searchFields.map((item, index) => (
                 <>
                     <div key={index} className={'w-1/5'}>
-                        <MultiInput {...item}/>
+                        <MultiInput {...item} />
                     </div>
                     <Divider mr={'xs'} size="xs" orientation="vertical" />
                 </>
@@ -27,7 +27,7 @@ const SearchBar = () => {
                     <div>Salary</div>
                     <div>&#36;{value[0]} - &#36;{value[1]}</div>
                 </div>
-                <RangeSlider color={'bright-sun.4'} size={'xs'} value={value} onChange={setValue} 
+                <RangeSlider color={'bright-sun.4'} size={'xs'} value={value} onChange={setValue}
                     labelTransitionProps={{
                         transition: 'skew-down',
                         duration: 150,
