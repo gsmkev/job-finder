@@ -5,7 +5,7 @@ import Profile from "../TalentProfile/Profile";
 import { profile } from "../Data/TalentData";
 import RecommendedTalent from "../TalentProfile/RecommendedTalent";
 
-const TalentProfile = () => {
+const TalentProfilePage = () => {
     return (
         <div className={'min-h-[100vh] bg-mine-shaft-950 font-[poppins] p-4'}>
             <Link className="my-4 inline-block" to={'/find-talents'}>
@@ -19,4 +19,4 @@ const TalentProfile = () => {
     );
 }
 
-export default TalentProfile;
+export default TalentProfilePage;

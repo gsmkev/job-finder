@@ -2,7 +2,7 @@ import { Divider } from "@mantine/core";
 import SearchBar from "../FindTalents/SearchBar";
 import Talents from "../FindTalents/Talents";
 
-const FindTalents = () => {
+const FindTalentPage = () => {
     return (
         <div className={'min-h-[100vh] bg-mine-shaft-950 font-[poppins]'}>
             <SearchBar />
@@ -12,4 +12,4 @@ const FindTalents = () => {
     );
 }
 
-export default FindTalents;
+export default FindTalentPage;

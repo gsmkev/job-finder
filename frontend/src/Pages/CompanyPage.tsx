@@ -4,7 +4,7 @@ import { Button } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
 import Similar from "../Company/Similar";
 
-const Companies = () => {
+const CompanyPage = () => {
     const navigate = useNavigate();
     return (
         <div className={'min-h-[100vh] bg-mine-shaft-950 font-[poppins] p-4'}>
@@ -17,4 +17,4 @@ const Companies = () => {
     );
 }
 
-export default Companies;
+export default CompanyPage;

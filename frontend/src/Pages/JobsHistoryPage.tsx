@@ -1,6 +1,6 @@
 import JobHistory from "../JobHistory/JobHistory";
 
-const JobsHistory = () => {
+const JobsHistoryPage = () => {
     return (
         <div className={'min-h-[90vh] bg-mine-shaft-950 font-[poppins] p-4'}>
             <div className="my-5">
@@ -10,4 +10,4 @@ const JobsHistory = () => {
     );
 }
 
-export default JobsHistory;
+export default JobsHistoryPage;

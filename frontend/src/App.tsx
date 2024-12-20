@@ -6,19 +6,18 @@ import '@mantine/tiptap/styles.css';
 import '@mantine/dates/styles.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-import HomePage from "./Pages/HomePage";
-import FindJobs from './Pages/FindJobs';
-import FindTalents from './Pages/FindTalents';
-
 import Header from './Header/Header';
+import HomePage from "./Pages/HomePage";
+import FindJobPage from './Pages/FindJobPage';
+import JobsDescriptionPage from './Pages/JobsDescriptionPage';
+import UploadJobPage from './Pages/UploadJobPage';
+import ApplyJobPage from './Pages/ApplyJobPage';
+import FindTalentPage from './Pages/FindTalentPage';
+import TalentProfilePage from './Pages/TalentProfilePage';
+import CompanyPage from './Pages/CompanyPage';
+import PostedJobPage from './Pages/PostedJobPage';
+import JobsHistoryPage from './Pages/JobsHistoryPage';
 import Footer from './Footer/Footer';
-import TalentProfile from './Pages/TalentProfile';
-import UploadJobs from './Pages/UploadJobs';
-import JobsDescription from './Pages/JobsDescription';
-import ApplyJobs from './Pages/ApplyJobs';
-import Companies from './Pages/Companies';
-import PostedJobs from './Pages/PostedJobs';
-import JobsHistory from './Pages/JobsHistory';
 
 function App() {
     const theme = createTheme({
@@ -62,16 +61,16 @@ function App() {
                 <Header />
                 <Divider size="xs" mx={'md'} />
                 <Routes>
-                    <Route path={'*'} element={<HomePage/>}/>
-                    <Route path={'find-jobs'} element={<FindJobs/>}/>
-                    <Route path={'jobs'} element={<JobsDescription/>}/>
-                    <Route path={'upload-jobs'} element={<UploadJobs/>}/>
-                    <Route path={'apply-jobs'} element={<ApplyJobs/>}/>
-                    <Route path={'find-talents'} element={<FindTalents/>}/>
-                    <Route path={'talent-profile'} element={<TalentProfile/>}/>
-                    <Route path={'companies'} element={<Companies/>}/>
-                    <Route path={'posted-jobs'} element={<PostedJobs/>}/>
-                    <Route path={'jobs-history'} element={<JobsHistory/>}/>
+                    <Route path={'*'} element={ <HomePage /> }/>
+                    <Route path={'find-jobs'} element={ <FindJobPage /> }/>
+                    <Route path={'jobs'} element={ <JobsDescriptionPage /> }/>
+                    <Route path={'upload-jobs'} element={ <UploadJobPage /> }/>
+                    <Route path={'apply-jobs'} element={ <ApplyJobPage /> }/>
+                    <Route path={'find-talents'} element={ <FindTalentPage /> }/>
+                    <Route path={'talent-profile'} element={ <TalentProfilePage /> }/>
+                    <Route path={'companies'} element={ <CompanyPage /> }/>
+                    <Route path={'posted-jobs'} element={ <PostedJobPage /> }/>
+                    <Route path={'jobs-history'} element={ <JobsHistoryPage /> }/>
                 </Routes>
                 <Footer />
             </div>
