@@ -4,10 +4,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ApplyJob = () => {
+    const iconCheck = <IconCheck style={{ width: rem(20), height: rem(20) }} />;
+    
     const [preview, setPreview] = useState(false);
     const [submit, setSubmit] = useState(false);
     const [timer, setTimer] = useState(5);
     const navigate = useNavigate();
+    
     const handlePreview = () => {
         setPreview(!preview);
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -46,15 +49,65 @@ const ApplyJob = () => {
                 <div className="text-xl font-semibold mb-5">Submit your Application</div>
                 <div className="flex flex-col gap-5">
                     <div className="flex gap-10 [&>*]:w-1/2">
-                        <TextInput readOnly={preview} variant={preview ? "unstyled" : "default"} className={preview ? "text-mine-shaft-300 font-semibold" : ""} label="Full Name" withAsterisk placeholder="John Doe" />
-                        <TextInput readOnly={preview} variant={preview ? "unstyled" : "default"} className={preview ? "text-mine-shaft-300 font-semibold" : ""} label="Email" withAsterisk placeholder="john@doe.com" />
+                        <TextInput 
+                            readOnly={preview} 
+                            variant={preview ? "unstyled" : "default"} 
+                            className={preview ? "text-mine-shaft-300 font-semibold" : ""} 
+                            withAsterisk
+                            label="Full Name"  
+                            placeholder="John Doe" 
+                        />
+                        <TextInput 
+                            readOnly={preview} 
+                            variant={preview ? "unstyled" : "default"} 
+                            className={preview ? "text-mine-shaft-300 font-semibold" : ""} 
+                            withAsterisk 
+                            label="Email" 
+                            placeholder="john@doe.com"
+                        />
                     </div>
                     <div className="flex gap-10 [&>*]:w-1/2">
-                        <NumberInput readOnly={preview} variant={preview ? "unstyled" : "default"} className={preview ? "text-mine-shaft-300 font-semibold" : ""} label="Phone Number" withAsterisk placeholder="1 234 567 890" hideControls min={0} max={9999999999} clampBehavior="strict" />
-                        <TextInput readOnly={preview} variant={preview ? "unstyled" : "default"} className={preview ? "text-mine-shaft-300 font-semibold" : ""} label="Website" withAsterisk placeholder="johndoe.com" />
+                        <NumberInput 
+                            readOnly={preview} 
+                            variant={preview ? "unstyled" : "default"} 
+                            className={preview ? "text-mine-shaft-300 font-semibold" : ""} 
+                            label="Phone Number" 
+                            withAsterisk 
+                            placeholder="1 234 567 890" 
+                            hideControls 
+                            min={0}
+                            max={9999999999}
+                            clampBehavior="strict" 
+                        />
+                        <TextInput
+                            readOnly={preview} 
+                            variant={preview ? "unstyled" : "default"} 
+                            className={preview ? "text-mine-shaft-300 font-semibold" : ""} 
+                            withAsterisk
+                            label="Website"  
+                            placeholder="johndoe.com" 
+                        />
                     </div>
-                    <FileInput readOnly={preview} variant={preview ? "unstyled" : "default"} className={preview ? "text-mine-shaft-300 font-semibold" : ""} leftSection={<IconPaperclip />} label="Resume" placeholder="Upload your resume" withAsterisk leftSectionPointerEvents="none" />
-                    <Textarea readOnly={preview} variant={preview ? "unstyled" : "default"} className={preview ? "text-mine-shaft-300 font-semibold" : ""} label="Cover Letter" placeholder="Write a cover letter" withAsterisk autosize minRows={4} />
+                    <FileInput 
+                        readOnly={preview} 
+                        variant={preview ? "unstyled" : "default"} 
+                        className={preview ? "text-mine-shaft-300 font-semibold" : ""}
+                        leftSection={<IconPaperclip />}
+                        withAsterisk
+                        leftSectionPointerEvents="none" 
+                        label="Resume" 
+                        placeholder="Upload your resume"
+                    />
+                    <Textarea 
+                        readOnly={preview} 
+                        variant={preview ? "unstyled" : "default"} 
+                        className={preview ? "text-mine-shaft-300 font-semibold" : ""} 
+                        withAsterisk 
+                        autosize 
+                        minRows={4} 
+                        label="Cover Letter" 
+                        placeholder="Write a cover letter" 
+                    />
                     {!preview && <Button onClick={handlePreview} color="bright-sun.4" variant="light">Preview</Button>}
                     {preview && (
                         <div className="flex gap-10 [&>*]:w-1/2">
@@ -64,7 +117,24 @@ const ApplyJob = () => {
                     )}
                 </div>
             </div>
-            <Notification icon={<IconCheck style={{ width: rem(20), height: rem(20) }} />} className={`!border-bright-sun-400 -translate-y-20 !fixed z-[1001] top-0 left-[35%] transition duration-300 ease-in-out ${submit ? "translate-y-0" : "-translate-y-20"}`} title="Your application has been submitted successfully." color="bright-sun.4" mt="md" withCloseButton={false} withBorder>Redirecting to Find Jobs in {timer} seconds.
+            <Notification 
+                icon={ iconCheck } 
+                className={`
+                    !border-bright-sun-400
+                    -translate-y-20 
+                    !fixed z-[1001] 
+                    top-0 
+                    left-[35%]
+                    transition
+                    duration-300
+                    ease-in-out 
+                    ${submit ? "translate-y-0" : "-translate-y-20"}`} 
+                title="Your application has been submitted successfully." 
+                color="bright-sun.4" 
+                mt="md" 
+                withCloseButton={false} 
+                withBorder>
+                    Redirecting to Find Jobs in {timer} seconds.
             </Notification>
         </>
     );
