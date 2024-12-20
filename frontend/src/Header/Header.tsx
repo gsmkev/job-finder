@@ -1,9 +1,11 @@
 import {Avatar, Indicator} from "@mantine/core";
 import {IconAsset, IconBell, IconSettings} from "@tabler/icons-react"
 import NavLinks from "./NavLinks";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
-    return (
+    const location = useLocation();
+    return ['/register', '/login'].includes(location.pathname) ? <></> : (
         <div className={'w-full bg-mine-shaft-950 text-white h-20 px-6 flex justify-between items-center font-[poppins]'}>
             <div className={'flex gap-3 items-center text-bright-sun-400'}>
                 <IconAsset className={'h-10 w-10'} stroke={1.25}/>

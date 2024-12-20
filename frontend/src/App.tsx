@@ -18,6 +18,7 @@ import CompanyPage from './Pages/CompanyPage';
 import PostedJobPage from './Pages/PostedJobPage';
 import JobsHistoryPage from './Pages/JobsHistoryPage';
 import Footer from './Footer/Footer';
+import AuthPage from './Pages/AuthPage';
 
 function App() {
     const theme = createTheme({
@@ -71,6 +72,8 @@ function App() {
                     <Route path={'companies'} element={ <CompanyPage /> }/>
                     <Route path={'posted-jobs'} element={ <PostedJobPage /> }/>
                     <Route path={'jobs-history'} element={ <JobsHistoryPage /> }/>
+                    <Route path={'login'} element={ <AuthPage /> }/>
+                    <Route path={'register'} element={ <AuthPage /> }/>
                 </Routes>
                 <Footer />
             </div>
