@@ -1,4 +1,4 @@
-const CertificationCard = (props:any) => {
+const CertificationCard = (props: any) => {
     return (
         <div className={'flex justify-between'}>
             <div className={'flex gap-2 items-center'}>

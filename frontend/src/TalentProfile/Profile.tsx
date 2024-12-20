@@ -3,12 +3,12 @@ import { IconBriefcase, IconMapPin } from "@tabler/icons-react";
 import ExperienceCard from "./ExperienceCard";
 import CertificationCard from "./CertificationCard";
 
-const Profile = (props:any) => {
+const Profile = (props: any) => {
     return (
         <div className="w-2/3">
             <div className="relative">
                 <img className="rounded-t-2xl" src="/Profile/banner.jpg" alt="" />
-                <img 
+                <img
                     className={`
                         w-48 
                         h-48 
@@ -18,23 +18,23 @@ const Profile = (props:any) => {
                         -bottom-1/4 
                         left-3 
                         rounded-full
-                    `} 
-                    src="/avatar1.png" 
-                    alt="" 
+                    `}
+                    src="/avatar1.png"
+                    alt=""
                 />
             </div>
             <div className="px-3 mt-16">
                 <div className="text-3xl font-semibold flex justify-between">
-                    {props.name} 
-                    <Button 
-                        color="bright-sun.4" 
+                    {props.name}
+                    <Button
+                        color="bright-sun.4"
                         variant="light"
                     >
                         Message
                     </Button>
                 </div>
                 <div className="text-x flex gap-1 items-center">
-                    <IconBriefcase className="h-5 w-5" stroke={1.5} /> 
+                    <IconBriefcase className="h-5 w-5" stroke={1.5} />
                     {props.role} &bull; {props.company}
                 </div>
                 <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
@@ -52,8 +52,8 @@ const Profile = (props:any) => {
                     <div className="text-2xl font-semibold mb-3">Skills</div>
                     <div className="flex flex-wrap gap-2">
                         {props.skills.map((skill: any, index: any) => (
-                            <div 
-                                key={index} 
+                            <div
+                                key={index}
                                 className={`
                                     bg-bright-sun-300 
                                     bg-opacity-15 
@@ -72,11 +72,11 @@ const Profile = (props:any) => {
                 <Divider my={'xl'} />
                 <div className="px-3">
                     <div className="text-2xl font-semibold mb-5">Experience</div>
-                        <div className="flex flex-col gap-8">
-                            {props.experience.map((exp: any, index: any) => (
-                                <ExperienceCard key={index} {...exp} />
-                            ))}
-                        </div>
+                    <div className="flex flex-col gap-8">
+                        {props.experience.map((exp: any, index: any) => (
+                            <ExperienceCard key={index} {...exp} />
+                        ))}
+                    </div>
                 </div>
                 <Divider my={'xl'} />
                 <div className="px-3">
