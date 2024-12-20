@@ -16,11 +16,23 @@ const UploadJob = () => {
                     ))}
                 </div>
                 <div className="flex gap-10">
-                    <TagsInput withAsterisk label="Skills" placeholder="Enter Skills" clearable acceptValueOnBlur className="w-full"  splitChars={[',', ' ', '|']}/>
+                    <TagsInput
+                        withAsterisk
+                        clearable
+                        acceptValueOnBlur
+                        className="w-full"
+                        splitChars={[',', ' ', '|']}
+                        label="Skills"
+                        placeholder="Enter Skills"
+                    />
                 </div>
-                <div className="[&_button[data-active='true']]:!text-bright-sun-400 [&_button[data-active='true']]:!bg-bright-sun-400/20">
+                <div className={`
+                        [&_button[data-active='true']]:!text-bright-sun-400 
+                        [&_button[data-active='true']]:!bg-bright-sun-400/20
+                    `}
+                >
                     <div className="text-sm font-medium">Job Description</div>
-                    <TextEditor/>
+                    <TextEditor />
                 </div>
                 <div className="flex gap-4">
                     <Button color="bright-sun.4" variant="light">Upload Job</Button>
