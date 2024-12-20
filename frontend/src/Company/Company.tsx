@@ -9,7 +9,21 @@ const Company = () => {
         <div className="w-3/4">
             <div className="relative">
                 <img className="rounded-t-2xl" src="/Profile/banner.jpg" alt="" />
-                <img className="w-36 h-36 border-mine-shaft-950 border-8 absolute -bottom-1/4 left-5 p-2 rounded-3xl bg-mine-shaft-950" src="/Icons/Google.png" alt="" />
+                <img 
+                    className={`
+                        w-36 
+                        h-36 
+                        border-mine-shaft-950 
+                        border-8 
+                        absolute 
+                        -bottom-1/4 
+                        left-5 
+                        p-2 
+                        rounded-3xl 
+                        bg-mine-shaft-950`} 
+                    src="/Icons/Google.png" 
+                    alt=""
+                />
             </div>
             <div className="px-3 mt-12">
                 <div className="text-3xl font-semibold flex justify-between">Google 
