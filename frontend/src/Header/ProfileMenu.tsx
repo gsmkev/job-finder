@@ -1,6 +1,6 @@
 import { Avatar, Menu, Switch, rem } from '@mantine/core';
-import { 
-    IconMessageCircle, 
+import {
+    IconMessageCircle,
     IconUserCircle,
     IconFileText,
     IconMoon,
@@ -10,7 +10,7 @@ import {
 import { useState } from 'react';
 
 const ProfileMenu = () => {
-    
+
     const [checked, setChecked] = useState(false);
     const [opened, setOpened] = useState(false);
 
@@ -21,14 +21,21 @@ const ProfileMenu = () => {
     const iconSun = <IconSun className='text-bright-sun-400' style={{ width: rem(14), height: rem(14) }} />;
     const iconLogout = <IconLogout2 style={{ width: rem(14), height: rem(14) }} />;
 
-    const switchDarkMode = <Switch size="md" color='dark.4' offLabel={iconSun} onLabel={iconMoon} checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} />;
+    const switchDarkMode = <Switch
+        size="md"
+        color='dark.4'
+        offLabel={iconSun}
+        onLabel={iconMoon}
+        checked={checked}
+        onChange={(event) => setChecked(event.currentTarget.checked)}
+    />;
 
     return (
         <Menu opened={opened} onChange={setOpened} shadow="md" width={200}>
             <Menu.Target>
                 <div className={'flex cursor-pointer gap-3 items-center'}>
                     <div>Kevin</div>
-                    <Avatar src="avatar1.png" alt="it's me"/>
+                    <Avatar src="avatar1.png" alt="it's me" />
                 </div>
             </Menu.Target>
 
