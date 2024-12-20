@@ -15,7 +15,7 @@ const PostedJob = () => {
                     <Tabs.Panel value="active">
                         <div className="flex flex-col gap-5 mt-5">
                             {activeJobs.map((job, index) => (
-                                <PostedJobCard key = {index} {...job} />
+                                <PostedJobCard key={index} {...job} />
                             ))}
                         </div>
                     </Tabs.Panel>

@@ -1,4 +1,4 @@
-const PostedJobCard = (props:any) => {
+const PostedJobCard = (props: any) => {
     return (
         <div className="bg-mine-shaft-900 rounded-xl p-2 border-l-2 border-l-bright-sun-400">
             <div className="text-sm font-semibold">{props.jobTitle}</div>
