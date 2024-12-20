@@ -10,7 +10,7 @@ const SearchBar = () => {
             {dropdownData.map((item, index) => (
                 <>
                     <div key={index} className={'w-1/5'}>
-                        <MultiInput {...item}/>
+                        <MultiInput {...item} />
                     </div>
                     <Divider mr={'xs'} size="xs" orientation="vertical" />
                 </>
@@ -20,7 +20,11 @@ const SearchBar = () => {
                     <div>Salary</div>
                     <div>&#36;{value[0]} - &#36;{value[1]}</div>
                 </div>
-                <RangeSlider color={'bright-sun.4'} size={'xs'} value={value} onChange={setValue} 
+                <RangeSlider
+                    color={'bright-sun.4'}
+                    size={'xs'}
+                    value={value}
+                    onChange={setValue}
                     labelTransitionProps={{
                         transition: 'skew-down',
                         duration: 150,
