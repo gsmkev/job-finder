@@ -8,11 +8,35 @@ const Profile = (props:any) => {
         <div className="w-2/3">
             <div className="relative">
                 <img className="rounded-t-2xl" src="/Profile/banner.jpg" alt="" />
-                <img className="w-48 h-48 border-mine-shaft-950 border-8 absolute -bottom-1/4 left-3 rounded-full" src="/avatar1.png" alt="" />
+                <img 
+                    className={`
+                        w-48 
+                        h-48 
+                        border-mine-shaft-950 
+                        border-8 
+                        absolute 
+                        -bottom-1/4 
+                        left-3 
+                        rounded-full
+                    `} 
+                    src="/avatar1.png" 
+                    alt="" 
+                />
             </div>
             <div className="px-3 mt-16">
-                <div className="text-3xl font-semibold flex justify-between">{props.name} <Button color="bright-sun.4" variant="light">Message</Button></div>
-                <div className="text-x flex gap-1 items-center"><IconBriefcase className="h-5 w-5" stroke={1.5} /> {props.role} &bull; {props.company}</div>
+                <div className="text-3xl font-semibold flex justify-between">
+                    {props.name} 
+                    <Button 
+                        color="bright-sun.4" 
+                        variant="light"
+                    >
+                        Message
+                    </Button>
+                </div>
+                <div className="text-x flex gap-1 items-center">
+                    <IconBriefcase className="h-5 w-5" stroke={1.5} /> 
+                    {props.role} &bull; {props.company}
+                </div>
                 <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
                     <IconMapPin className="h-5 w-5" stroke={1.5} /> {props.location}
                 </div>
@@ -28,7 +52,18 @@ const Profile = (props:any) => {
                     <div className="text-2xl font-semibold mb-3">Skills</div>
                     <div className="flex flex-wrap gap-2">
                         {props.skills.map((skill: any, index: any) => (
-                            <div key={index} className="bg-bright-sun-300 bg-opacity-15 rounded-3xl px-3 py-1 text-bright-sun-400 text-sm font-medium">
+                            <div 
+                                key={index} 
+                                className={`
+                                    bg-bright-sun-300 
+                                    bg-opacity-15 
+                                    rounded-3xl 
+                                    px-3 
+                                    py-1 
+                                    text-bright-sun-400 
+                                    text-sm 
+                                    font-medium
+                                `}>
                                 {skill}
                             </div>
                         ))}
