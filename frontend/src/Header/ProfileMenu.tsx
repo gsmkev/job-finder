@@ -8,6 +8,7 @@ import {
     IconLogout2
 } from '@tabler/icons-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProfileMenu = () => {
 
@@ -40,7 +41,11 @@ const ProfileMenu = () => {
             </Menu.Target>
 
             <Menu.Dropdown onChange={() => setOpened(true)}>
-                <Menu.Item leftSection={iconUser}>Profile</Menu.Item>
+                <Menu.Item leftSection={iconUser}>
+                    <Link to={'/profile'}>
+                        Profile
+                    </Link>
+                </Menu.Item>
                 <Menu.Item leftSection={iconMessage}>Messages</Menu.Item>
                 <Menu.Item leftSection={iconFile}>Resume</Menu.Item>
                 <Menu.Item leftSection={iconMoon} rightSection={switchDarkMode}>Dark Mode</Menu.Item>
