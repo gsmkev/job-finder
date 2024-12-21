@@ -64,11 +64,18 @@ const Profile = (props: any) => {
                         color="bright-sun.4"
                         size="lg"
                     >
-                        { edit[0] ? iconPencil : iconDeviceFloppy }
+                        { edit[0] ? iconDeviceFloppy : iconPencil }
                     </ActionIcon>
                 </div>
                 {
                     edit[0] ? 
+                        <>
+                            <div className="flex gap-10 [&>*]:w-1/2">
+                                <SelectInput {...select[0]} edit={edit[1]} />
+                                <SelectInput {...select[1]} edit={edit[2]} />
+                            </div>
+                            <SelectInput {...select[2]} edit={edit[3]} />
+                        </> :
                         <>
                             <div className="text-x flex gap-1 items-center">
                                 <IconBriefcase className="h-5 w-5" />
@@ -77,13 +84,6 @@ const Profile = (props: any) => {
                             <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
                                 <IconMapPin className="h-5 w-5" stroke={1.5} /> {props.location}
                             </div>
-                        </> :
-                        <>
-                            <div className="flex gap-10 [&>*]:w-1/2">
-                                <SelectInput {...select[0]} edit={edit[1]} />
-                                <SelectInput {...select[1]} edit={edit[2]} />
-                            </div>
-                            <SelectInput {...select[2]} edit={edit[3]} />
                         </>
                 }
                 
@@ -98,21 +98,21 @@ const Profile = (props: any) => {
                             color="bright-sun.4"
                             size="lg"
                         >
-                            { edit[1] ?  iconPencil : iconDeviceFloppy }
+                            { edit[1] ?  iconDeviceFloppy : iconPencil }
                         </ActionIcon>
                     </div>
                     {
                         edit[1] ? 
+                                <Textarea 
+                                    value={about}
+                                    onChange={(event) => setAbout(event.currentTarget.value)}
+                                    minRows={3}
+                                    autosize
+                                    placeholder="Write something about yourself..."
+                                /> :
                             <div className="text-sm text-mine-shaft-300 text-justify">
                                 {about}
-                            </div> :
-                            <Textarea 
-                                value={about}
-                                onChange={(event) => setAbout(event.currentTarget.value)}
-                                minRows={3}
-                                autosize
-                                placeholder="Write something about yourself..."
-                            />
+                            </div>
                     }
                 </div>
                 
