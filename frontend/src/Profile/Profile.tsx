@@ -98,21 +98,21 @@ const Profile = (props: any) => {
                             color="bright-sun.4"
                             size="lg"
                         >
-                            { edit[1] ? iconPencil : iconDeviceFloppy }
+                            { edit[1] ?  iconPencil : iconDeviceFloppy }
                         </ActionIcon>
                     </div>
                     {
                         edit[1] ? 
+                            <div className="text-sm text-mine-shaft-300 text-justify">
+                                {about}
+                            </div> :
                             <Textarea 
                                 value={about}
                                 onChange={(event) => setAbout(event.currentTarget.value)}
                                 minRows={3}
                                 autosize
                                 placeholder="Write something about yourself..."
-                            /> :
-                            <div className="text-sm text-mine-shaft-300 text-justify">
-                                {about}
-                            </div>
+                            />
                     }
                 </div>
                 
@@ -127,7 +127,7 @@ const Profile = (props: any) => {
                             color="bright-sun.4"
                             size="lg"
                         >
-                            { edit[2] ? iconPencil : iconDeviceFloppy }
+                            { edit[2] ? iconDeviceFloppy : iconPencil }
                         </ActionIcon>
                     </div>
                     {
@@ -178,7 +178,7 @@ const Profile = (props: any) => {
                                 color="bright-sun.4"
                                 size="lg"
                             >
-                                { edit[3] ? iconPencil : iconDeviceFloppy }
+                                { edit[3] ? iconDeviceFloppy : iconPencil }
                             </ActionIcon>
                         </div>
                     </div>
@@ -214,7 +214,7 @@ const Profile = (props: any) => {
                                 color="bright-sun.4"
                                 size="lg"
                             >
-                                { edit[4] ? iconPencil : iconDeviceFloppy }
+                                { edit[4] ? iconDeviceFloppy : iconPencil }
                             </ActionIcon>
                         </div>
                     </div>
