@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.jobfinder.dto.LoginDTO;
 import com.jobfinder.dto.UserDTO;
 import com.jobfinder.entity.User;
 import com.jobfinder.exception.backendException;
@@ -34,4 +35,13 @@ public class DefaultUserService implements UserService {
         return user.toDTO();
     }
 
+    @Override
+    public UserDTO loginUser(LoginDTO loginDTO) throws backendException {
+        User user = userRepository.findUserByEmail(loginDTO.getEmail()).orElseThrow(() -> new backendException("USER_NOT_FOUND"));
+        if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+            throw new backendException("INVALID_CREDENTIALS");
+        }
+
+        return user.toDTO();
+    }
 }

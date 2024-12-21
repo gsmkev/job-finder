@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jobfinder.dto.LoginDTO;
 import com.jobfinder.dto.UserDTO;
 import com.jobfinder.exception.backendException;
 import com.jobfinder.service.UserService;
@@ -30,5 +31,11 @@ public class UserAPI {
     public ResponseEntity<UserDTO> registerUser(@RequestBody @Valid UserDTO userDTO) throws backendException {
         userDTO = userService.registerUser(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> loginUser(@RequestBody @Valid LoginDTO loginDTO) throws backendException {
+        
+        return new ResponseEntity<>(userService.loginUser(loginDTO), HttpStatus.OK);
     }
 }
