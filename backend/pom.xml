@@ -8,11 +8,11 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.jobportal</groupId>
+	<groupId>com.jobfinder</groupId>
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Springboot backend for React Project: JobFinder</description>
 	<url/>
 	<licenses>
 		<license/>

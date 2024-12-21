@@ -1,11 +1,11 @@
-package com.jobportal.entity;
+package com.jobfinder.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.jobportal.dto.AccountType;
-import com.jobportal.dto.UserDTO;
+import com.jobfinder.dto.AccountType;
+import com.jobfinder.dto.UserDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

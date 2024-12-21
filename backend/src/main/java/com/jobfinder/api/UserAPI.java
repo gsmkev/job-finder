@@ -1,4 +1,4 @@
-package com.jobportal.api;
+package com.jobfinder.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jobportal.dto.UserDTO;
-import com.jobportal.exception.backendException;
-import com.jobportal.service.UserService;
+import com.jobfinder.dto.UserDTO;
+import com.jobfinder.exception.backendException;
+import com.jobfinder.service.UserService;
 
 import jakarta.validation.Valid;
 

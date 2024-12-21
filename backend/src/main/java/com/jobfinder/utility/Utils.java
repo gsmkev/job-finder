@@ -1,4 +1,4 @@
-package com.jobportal.utility;
+package com.jobfinder.utility;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -7,8 +7,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
-import com.jobportal.entity.Sequence;
-import com.jobportal.exception.backendException;
+
+import com.jobfinder.entity.Sequence;
+import com.jobfinder.exception.backendException;
 
 @Component
 public class Utils {

@@ -1,4 +1,4 @@
-package com.jobportal.backend;
+package com.jobfinder.backend;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.jobportal.dto.AccountType;
-import com.jobportal.entity.User;
+import com.jobfinder.dto.AccountType;
+import com.jobfinder.entity.User;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-@SpringBootApplication(scanBasePackages = "com.jobportal")
-@EnableMongoRepositories(basePackages = "com.jobportal.repository")
+@SpringBootApplication(scanBasePackages = "com.jobfinder")
+@EnableMongoRepositories(basePackages = "com.jobfinder.repository")
 public class BackendApplication {
 
 	public static void main(String[] args) {

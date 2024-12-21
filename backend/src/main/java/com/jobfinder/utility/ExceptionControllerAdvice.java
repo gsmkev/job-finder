@@ -1,4 +1,4 @@
-package com.jobportal.utility;
+package com.jobfinder.utility;
 
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;

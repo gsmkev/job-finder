@@ -1,4 +1,4 @@
-package com.jobportal.dto;
+package com.jobfinder.dto;
 
 public enum AccountType {
     APPLICANT, EMPLOYER

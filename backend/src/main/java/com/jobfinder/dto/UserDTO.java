@@ -1,6 +1,6 @@
-package com.jobportal.dto;
+package com.jobfinder.dto;
 
-import com.jobportal.entity.User;
+import com.jobfinder.entity.User;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

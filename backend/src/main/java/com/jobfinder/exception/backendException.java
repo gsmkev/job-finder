@@ -1,4 +1,4 @@
-package com.jobportal.exception;
+package com.jobfinder.exception;
 
 public class backendException extends Exception {
 
