@@ -21,6 +21,8 @@ import AuthPage from './Pages/AuthPage';
 import ProfilePage from './Pages/ProfilePage';
 import Footer from './Components/Footer/Footer';
 import { Notifications } from '@mantine/notifications';
+import { Provider } from 'react-redux';
+import Store from './Store';
 
 
 function App() {
@@ -59,31 +61,33 @@ function App() {
         primaryShade: 4,
     });
     return (
-    <MantineProvider defaultColorScheme='dark' theme={theme}>
-        <Notifications position='top-center' zIndex={1000} />
-        <BrowserRouter>
-            <div className='relative'>
-                <Header />
-                <Divider size="xs" mx={'md'} />
-                <Routes>
-                    <Route path={'*'} element={ <HomePage /> }/>
-                    <Route path={'find-jobs'} element={ <FindJobPage /> }/>
-                    <Route path={'jobs'} element={ <JobsDescriptionPage /> }/>
-                    <Route path={'upload-jobs'} element={ <UploadJobPage /> }/>
-                    <Route path={'apply-jobs'} element={ <ApplyJobPage /> }/>
-                    <Route path={'find-talents'} element={ <FindTalentPage /> }/>
-                    <Route path={'talent-profile'} element={ <TalentProfilePage /> }/>
-                    <Route path={'companies'} element={ <CompanyPage /> }/>
-                    <Route path={'posted-jobs'} element={ <PostedJobPage /> }/>
-                    <Route path={'jobs-history'} element={ <JobsHistoryPage /> }/>
-                    <Route path={'login'} element={ <AuthPage /> }/>
-                    <Route path={'register'} element={ <AuthPage /> }/>
-                    <Route path={'profile'} element={ <ProfilePage /> }/>
-                </Routes>
-                <Footer />
-            </div>
-        </BrowserRouter>
-    </MantineProvider>
+    <Provider store={Store}>
+        <MantineProvider defaultColorScheme='dark' theme={theme}>
+            <Notifications position='top-center' zIndex={1000} />
+            <BrowserRouter>
+                <div className='relative'>
+                    <Header />
+                    <Divider size="xs" mx={'md'} />
+                    <Routes>
+                        <Route path={'*'} element={ <HomePage /> }/>
+                        <Route path={'find-jobs'} element={ <FindJobPage /> }/>
+                        <Route path={'jobs'} element={ <JobsDescriptionPage /> }/>
+                        <Route path={'upload-jobs'} element={ <UploadJobPage /> }/>
+                        <Route path={'apply-jobs'} element={ <ApplyJobPage /> }/>
+                        <Route path={'find-talents'} element={ <FindTalentPage /> }/>
+                        <Route path={'talent-profile'} element={ <TalentProfilePage /> }/>
+                        <Route path={'companies'} element={ <CompanyPage /> }/>
+                        <Route path={'posted-jobs'} element={ <PostedJobPage /> }/>
+                        <Route path={'jobs-history'} element={ <JobsHistoryPage /> }/>
+                        <Route path={'login'} element={ <AuthPage /> }/>
+                        <Route path={'register'} element={ <AuthPage /> }/>
+                        <Route path={'profile'} element={ <ProfilePage /> }/>
+                    </Routes>
+                    <Footer />
+                </div>
+            </BrowserRouter>
+        </MantineProvider>
+    </Provider>
     );
 }
 
