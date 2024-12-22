@@ -10,4 +10,6 @@ public interface UserService {
     public UserDTO loginUser(LoginDTO loginDTO) throws backendException;
 
     public Boolean sendOTP(String email) throws Exception;
+
+    public Boolean verifyOTP(String email, String otp) throws backendException;
 }

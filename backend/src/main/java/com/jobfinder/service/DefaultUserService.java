@@ -16,6 +16,7 @@ import com.jobfinder.entity.User;
 import com.jobfinder.exception.backendException;
 import com.jobfinder.repository.OTPRepository;
 import com.jobfinder.repository.UserRepository;
+import com.jobfinder.utility.Data;
 import com.jobfinder.utility.Utils;
 
 import jakarta.mail.internet.MimeMessage;
@@ -63,20 +64,32 @@ public class DefaultUserService implements UserService {
     @Override
     public Boolean sendOTP(String email) throws Exception {
         try {
-            userRepository
-            .findUserByEmail(email)
-            .orElseThrow(() -> new backendException("USER_NOT_FOUND"));
+            User user = userRepository
+                .findUserByEmail(email)
+                .orElseThrow(() -> new backendException("USER_NOT_FOUND"));
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(email);
             helper.setSubject("Yout OTP for JobFinder");
             OTP otp = new OTP(email, Utils.generateOTP(), LocalDateTime.now());
             otpRepository.save(otp);
-            helper.setText("Your OTP is: " + otp.getOTP(), false);
+            helper.setText(Data.getMessageBody(otp.getOTP(), user.getName()), true);
             javaMailSender.send(message);
             return true;
         } catch (Exception e) {
             throw new Exception("Failed to send OTP: " + e.getMessage());
         }
+    }
+
+    @Override
+    public Boolean verifyOTP(String email, String otp) throws backendException {
+        OTP otpEntity = otpRepository
+            .findOTPByEmail(email)
+            .orElseThrow(() -> new backendException("OTP_NOT_FOUND"));
+        if (!otpEntity.getOTP().equals(otp)) {
+            throw new backendException("OTP_INCORRECT");
+        }
+        otpRepository.delete(otpEntity);
+        return true;
     }
 }
