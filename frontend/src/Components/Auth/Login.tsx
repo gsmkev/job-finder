@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Services/UserService";
 import { loginValidation } from "../../Services/FormValidation";
 import { notifications } from "@mantine/notifications";
+import { useDisclosure } from "@mantine/hooks";
+import { ResetPassword } from "./ResetPassword";
 
 const form = {
     email: '',
@@ -20,6 +22,8 @@ const Login = () => {
 
     const [formErrors, setFormErrors] = useState<{[key: string]: string}>(form);
     const navigate = useNavigate();
+
+    const [opened, {open, close}] = useDisclosure(false);
 
     const handleChange = (event: any) => {
         setData({
@@ -77,53 +81,68 @@ const Login = () => {
     }
 
     return (
-        <div className="w-1/2 px-20 flex flex-col justify-center gap-3">
-            <div className="text-2xl font-semibold">Login Account</div>
-            <TextInput 
-                value={data.email}
-                onChange={handleChange}
-                error={formErrors.email}
-                name="email"
-                withAsterisk 
-                leftSection={iconAt} 
-                label="Email" 
-                placeholder="Enter your email" 
-            />
-            <PasswordInput 
-                value={data.password}
-                onChange={handleChange}
-                error={formErrors.password}
-                name="password"
-                withAsterisk
-                leftSection={iconLock}
-                label="Password" 
-                placeholder="Enter your password"
-            /> 
-            <Button 
-                autoContrast 
-                variant="filled" 
-                onClick={handleSubmit}
-            >
-                Login
-            </Button>
-            <div className="mx-auto">
-                Don't have an account? 
-                <span className={`
+        <>
+            <div className="w-1/2 px-20 flex flex-col justify-center gap-3">
+                <div className="text-2xl font-semibold">Login Account</div>
+                <TextInput 
+                    value={data.email}
+                    onChange={handleChange}
+                    error={formErrors.email}
+                    name="email"
+                    withAsterisk 
+                    leftSection={iconAt} 
+                    label="Email" 
+                    placeholder="Enter your email" 
+                />
+                <PasswordInput 
+                    value={data.password}
+                    onChange={handleChange}
+                    error={formErrors.password}
+                    name="password"
+                    withAsterisk
+                    leftSection={iconLock}
+                    label="Password" 
+                    placeholder="Enter your password"
+                /> 
+                <Button 
+                    autoContrast 
+                    variant="filled" 
+                    onClick={handleSubmit}
+                >
+                    Login
+                </Button>
+                <div className="mx-auto">
+                    Don't have an account?
+                    <span className={`
+                            text-bright-sun-400 
+                            hover:underline 
+                            font-medium
+                            cursor-pointer
+                            px-2
+                        `} 
+                        onClick={() => {
+                            navigate('/register');
+                            setData(form);
+                            setFormErrors(form);
+                        }}
+                    >
+                        Register here
+                    </span>
+                </div>
+                <div className={`
                         text-bright-sun-400 
                         hover:underline 
                         font-medium
                         cursor-pointer
-                    `} 
-                    onClick={() => {
-                        navigate('/register');
-                        setData(form);
-                        setFormErrors(form);
-                    }}
+                        text-center
+                    `}
+                    onClick={open}
                 >
-                    Register here
-                </span>
+                    Forgot your password? 
+                </div>
             </div>
-        </div>
+            <ResetPassword opened={opened} close={close} />
+        </>
     );
 }
 
