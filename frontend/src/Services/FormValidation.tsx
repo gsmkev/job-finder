@@ -24,4 +24,15 @@ const registerValidation = (name: string, value: any) => {
     }
 }
 
-export { registerValidation };
+const loginValidation = (name: string, value: any) => {
+    switch (name) {
+        case 'email':
+            return value.length === 0 ? 'Email is required': '';
+        case 'password':
+            return value.length === 0 ? 'Password is required' : ''
+        default:
+            return '';
+    }
+}
+
+export { registerValidation, loginValidation };

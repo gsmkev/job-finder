@@ -1,12 +1,28 @@
-import { IconAsset } from "@tabler/icons-react";
+import { IconArrowLeft, IconAsset } from "@tabler/icons-react";
 import Register from "../Components/Auth/Register";
 import Login from "../Components/Auth/Login";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@mantine/core";
 
 const AuthPage = () => {
     const locattion = useLocation();
+    const navigate = useNavigate();
     return (
-        <div className={'min-h-[90vh] bg-mine-shaft-950 font-[poppins] overflow-hidden'}>
+        <div className={'min-h-[90vh] bg-mine-shaft-950 font-[poppins] overflow-hidden relative'}>
+            <Button 
+                leftSection={ <IconArrowLeft size={20} /> }
+                color="bright-sun.4" 
+                variant="light" 
+                my={'md'} 
+                className={`
+                    !absolute 
+                    z-10
+                    left-5
+                `}
+                onClick={() => navigate('/')}
+            >
+                Home
+            </Button>
             <div className={`
                     w-[100vw] 
                     h-[100vh] 

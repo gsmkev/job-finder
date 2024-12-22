@@ -1,8 +1,10 @@
 import { Button, PasswordInput, rem, TextInput } from "@mantine/core";
-import { IconAt, IconLock } from "@tabler/icons-react";
+import { IconAt, IconCheck, IconLock, IconX } from "@tabler/icons-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Services/UserService";
+import { loginValidation } from "../../Services/FormValidation";
+import { notifications } from "@mantine/notifications";
 
 const form = {
     email: '',
@@ -14,23 +16,64 @@ const Login = () => {
     const iconAt = <IconAt style={{width: rem(16), height: rem(16)}} />;
     const iconLock = <IconLock style={{width: rem(16), height: rem(16)}} />;
 
-    const [data, setData] = useState(form);
+    const [data, setData] = useState<{[key: string]: string}>(form);
+
+    const [formErrors, setFormErrors] = useState<{[key: string]: string}>(form);
+    const navigate = useNavigate();
 
     const handleChange = (event: any) => {
         setData({
             ...data,
             [event.target.name]: event.target.value
         });
+        setFormErrors({
+            ...formErrors, 
+            [event.target.name]: ""
+        });
     }
 
     const handleSubmit = () => {
-        loginUser(data)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-            console.log(error.response.data);
-        });
+        const newFormErrors = Object.keys(data)
+            .reduce((errors: {[key: string]: string}, key) => {
+                errors[key] = loginValidation(key, data[key]);
+                return errors;
+            }, 
+            {}
+        );
+
+        setFormErrors(newFormErrors);
+        
+        if (Object.values(newFormErrors).every(error => error === '')) {
+            loginUser(data)
+            .then((data) => {
+                console.log(data);
+                setData(form);
+                notifications.show({
+                    title: 'Login successful',
+                    message: 'Redirecting to Home Page',
+                    color: 'teal',
+                    withCloseButton: true,
+                    icon: <IconCheck style={{width: "90%", height: "90%"}} />,
+                    withBorder: true,
+                    className: '!border-green-500/40',                    
+                });
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                notifications.show({
+                    title: 'Login failed',
+                    message: error.response?.data?.errorMessage || 'Invalid email or password',
+                    color: 'red',
+                    icon: <IconX style={{width: "90%", height: "90%"}} />,
+                    withCloseButton: true,
+                    withBorder: true,
+                    className: '!border-red-500/40',
+                });
+            });
+        }
     }
 
     return (
@@ -39,6 +82,7 @@ const Login = () => {
             <TextInput 
                 value={data.email}
                 onChange={handleChange}
+                error={formErrors.email}
                 name="email"
                 withAsterisk 
                 leftSection={iconAt} 
@@ -48,6 +92,7 @@ const Login = () => {
             <PasswordInput 
                 value={data.password}
                 onChange={handleChange}
+                error={formErrors.password}
                 name="password"
                 withAsterisk
                 leftSection={iconLock}
@@ -63,9 +108,20 @@ const Login = () => {
             </Button>
             <div className="mx-auto">
                 Don't have an account? 
-                <Link className="text-bright-sun-400 hover:underline font-medium" to={'/register'}>
+                <span className={`
+                        text-bright-sun-400 
+                        hover:underline 
+                        font-medium
+                        cursor-pointer
+                    `} 
+                    onClick={() => {
+                        navigate('/register');
+                        setData(form);
+                        setFormErrors(form);
+                    }}
+                >
                     Register here
-                </Link>
+                </span>
             </div>
         </div>
     );
