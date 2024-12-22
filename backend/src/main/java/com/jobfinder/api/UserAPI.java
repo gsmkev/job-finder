@@ -44,6 +44,12 @@ public class UserAPI {
         return new ResponseEntity<>(userService.loginUser(loginDTO), HttpStatus.OK);
     }
 
+    @PostMapping("/change-password")
+    public ResponseEntity<ResponseDTO> changePassword(@RequestBody @Valid LoginDTO loginDTO) throws backendException {
+        
+        return new ResponseEntity<>(userService.changePassword(loginDTO), HttpStatus.OK);
+    }
+
     @PostMapping("/sendOTP/{email}")
     public ResponseEntity<ResponseDTO> sendOTP(@PathVariable @Email(message = "{user.email.invalid}") String email) throws Exception {
         userService.sendOTP(email);

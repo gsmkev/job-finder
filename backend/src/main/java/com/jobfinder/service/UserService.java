@@ -1,6 +1,7 @@
 package com.jobfinder.service;
 
 import com.jobfinder.dto.LoginDTO;
+import com.jobfinder.dto.ResponseDTO;
 import com.jobfinder.dto.UserDTO;
 import com.jobfinder.exception.backendException;
 
@@ -12,4 +13,6 @@ public interface UserService {
     public Boolean sendOTP(String email) throws Exception;
 
     public Boolean verifyOTP(String email, String otp) throws backendException;
+
+    public ResponseDTO changePassword(LoginDTO loginDTO) throws backendException;
 }

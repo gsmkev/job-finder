@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jobfinder.dto.LoginDTO;
+import com.jobfinder.dto.ResponseDTO;
 import com.jobfinder.dto.UserDTO;
 import com.jobfinder.entity.OTP;
 import com.jobfinder.entity.User;
@@ -91,5 +92,15 @@ public class DefaultUserService implements UserService {
         }
         otpRepository.delete(otpEntity);
         return true;
+    }
+
+    @Override
+    public ResponseDTO changePassword(LoginDTO loginDTO) throws backendException {
+        User user = userRepository
+            .findUserByEmail(loginDTO.getEmail())
+            .orElseThrow(() -> new backendException("USER_NOT_FOUND"));
+        user.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
+        userRepository.save(user);
+        return new ResponseDTO("Password changed successfully");
     }
 }
