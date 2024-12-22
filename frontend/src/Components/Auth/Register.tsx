@@ -8,11 +8,12 @@ import {
     rem, 
     TextInput 
 } from "@mantine/core";
-import { IconAt, IconLock } from "@tabler/icons-react";
+import { IconAt, IconCheck, IconLock, IconX } from "@tabler/icons-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../Services/UserService";
 import { registerValidation } from "../../Services/FormValidation";
+import { notifications } from "@mantine/notifications";
 
 const form = {
     name: '',
@@ -30,6 +31,7 @@ const Register = () => {
     const [data, setData] = useState<{[key: string]: string}>(form);
 
     const [formErrors, setFormErrors] = useState<{[key: string]: string}>(form);
+    const navigate = useNavigate();
 
     const handleChange = (event: any) => {
         
@@ -82,8 +84,34 @@ const Register = () => {
         }
 
         registerUser(data)
-            .then(console.log)
-            .catch(console.log);
+            .then((data) => {
+                console.log(data);
+                setData(form);
+                notifications.show({
+                    title: 'Account created successfully',
+                    message: 'Redirecting to login page',
+                    color: 'teal',
+                    withCloseButton: true,
+                    icon: <IconCheck style={{width: "90%", height: "90%"}} />,
+                    withBorder: true,
+                    className: '!border-green-500/40',                    
+                });
+                setTimeout(() => {
+                    navigate('/login');
+                }, 4000);
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                notifications.show({
+                    title: 'Account creation failed',
+                    message: error.response?.data?.errorMessage || 'An error occurred during registration',
+                    color: 'red',
+                    icon: <IconX style={{width: "90%", height: "90%"}} />,
+                    withCloseButton: true,
+                    withBorder: true,
+                    className: '!border-red-500/40',
+                });
+            });
     }
 
     return (
@@ -176,9 +204,20 @@ const Register = () => {
             </Button>
             <div className="mx-auto">
                 Already have an account? 
-                <Link className="text-bright-sun-400 hover:underline font-medium" to={'/login'}>
+                <span className={`
+                        text-bright-sun-400 
+                        hover:underline 
+                        font-medium
+                        cursor-pointer
+                    `} 
+                    onClick={() => {
+                        navigate('/login');
+                        setData(form);
+                        setFormErrors(form);
+                    }}
+                >
                     Sign in here
-                </Link>
+                </span>
             </div>
         </div>
     );
