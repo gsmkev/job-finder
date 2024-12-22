@@ -1,5 +1,7 @@
 package com.jobfinder.utility;
 
+import java.security.SecureRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -31,5 +33,15 @@ public class Utils {
             throw new backendException("Unable to get sequence id for key : " + key);
         }
         return sequence.getSeq();
+    }
+
+    public static String generateOTP() {
+        StringBuilder otp = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+
+        for (int i = 0; i < 6; i++) {
+            otp.append(random.nextInt(10));
+        }
+        return otp.toString();
     }
 }

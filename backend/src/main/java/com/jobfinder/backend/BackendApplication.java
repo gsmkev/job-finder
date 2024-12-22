@@ -22,6 +22,8 @@ public class BackendApplication {
 		System.setProperty("env.MONGO_USER", dotenv.get("MONGO_USER"));
 		System.setProperty("env.MONGO_PASSWORD", dotenv.get("MONGO_PASSWORD"));
 		System.setProperty("env.MONGO_CLUSTER", dotenv.get("MONGO_CLUSTER"));
+        System.setProperty("env.GMAIL_USERNAME", dotenv.get("GMAIL_USERNAME"));
+		System.setProperty("env.GMAIL_PASSWORD", dotenv.get("GMAIL_PASSWORD"));
 		SpringApplication.run(BackendApplication.class, args);
 	}
 

@@ -8,4 +8,6 @@ public interface UserService {
     public UserDTO registerUser(UserDTO userDTO) throws backendException;
 
     public UserDTO loginUser(LoginDTO loginDTO) throws backendException;
+
+    public Boolean sendOTP(String email) throws Exception;
 }
