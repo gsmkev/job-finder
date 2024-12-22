@@ -1,4 +1,4 @@
-import UploadJob from "../UploadJob/UploadJob";
+import UploadJob from "../Components/UploadJob/UploadJob";
 
 const UploadJobPage = () => {
     return (

@@ -5,9 +5,8 @@ import '@mantine/carousel/styles.css';
 import '@mantine/tiptap/styles.css';
 import '@mantine/dates/styles.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-
-import Header from './Header/Header';
-import HomePage from "./Pages/HomePage";
+import Header from './Components/Header/Header';
+import HomePage from './Pages/HomePage';
 import FindJobPage from './Pages/FindJobPage';
 import JobsDescriptionPage from './Pages/JobsDescriptionPage';
 import UploadJobPage from './Pages/UploadJobPage';
@@ -17,9 +16,10 @@ import TalentProfilePage from './Pages/TalentProfilePage';
 import CompanyPage from './Pages/CompanyPage';
 import PostedJobPage from './Pages/PostedJobPage';
 import JobsHistoryPage from './Pages/JobsHistoryPage';
-import Footer from './Footer/Footer';
 import AuthPage from './Pages/AuthPage';
 import ProfilePage from './Pages/ProfilePage';
+import Footer from './Components/Footer/Footer';
+
 
 function App() {
     const theme = createTheme({

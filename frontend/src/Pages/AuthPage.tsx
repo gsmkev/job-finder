@@ -1,6 +1,6 @@
 import { IconAsset } from "@tabler/icons-react";
-import Register from "../Auth/Register";
-import Login from "../Auth/Login";
+import Register from "../Components/Auth/Register";
+import Login from "../Components/Auth/Login";
 import { useLocation } from "react-router-dom";
 
 const AuthPage = () => {
