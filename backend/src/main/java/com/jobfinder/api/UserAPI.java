@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @Validated
 @RequestMapping("/users")
 public class UserAPI {
