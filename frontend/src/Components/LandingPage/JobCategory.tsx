@@ -27,7 +27,7 @@ const JobCategory = () => {
             >
                 {
                     jobCategory.map((category, index) => (
-                        <Carousel.Slide>
+                        <Carousel.Slide key={index}>
                             <div className={`
                                     flex 
                                     flex-col 

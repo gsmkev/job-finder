@@ -14,13 +14,13 @@ const SearchBar = () => {
                 </div>
                 <Input variant="unstyled" placeholder="Talent Name" className="[&_input]:!placeholder-mine-shaft-300" />
             </div>
-            {searchFields.map((item, index) => (
-                <>
-                    <div key={index} className={'w-1/5'}>
+            {searchFields.map((item) => (
+                <div key={`dropdown-${item.title}`} className="flex flex-1">
+                    <div className={'w-full'}>
                         <MultiInput {...item} />
                     </div>
                     <Divider mr={'xs'} size="xs" orientation="vertical" />
-                </>
+                </div>
             ))}
             <div className={'w-1/5 [&_.mantine-Slider-label]:!translate-y-10'}>
                 <div className={'flex text-sm justify-between'}>
