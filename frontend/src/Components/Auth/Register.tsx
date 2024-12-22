@@ -12,6 +12,7 @@ import { IconAt, IconLock } from "@tabler/icons-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { registerUser } from "../../Services/UserService";
+import { registerValidation } from "../../Services/FormValidation";
 
 const form = {
     name: '',
@@ -26,23 +27,63 @@ const Register = () => {
     const iconAt = <IconAt style={{width: rem(16), height: rem(16)}} />;
     const iconLock = <IconLock style={{width: rem(16), height: rem(16)}} />;
 
-    const [data, setData] = useState(form);
+    const [data, setData] = useState<{[key: string]: string}>(form);
+
+    const [formErrors, setFormErrors] = useState<{[key: string]: string}>(form);
 
     const handleChange = (event: any) => {
-        setData({
-            ...data,
-            [event?.target?.name ?? 'accountType']: event?.target?.value ?? event
+        
+        let { name, value } = event.target;
+
+        if (typeof(event) === 'string') {
+            setData({
+                ...data,
+                accountType: event
+            });
+            return;
+        } else {
+            setData({
+                ...data,
+                [name]: value
+            });
+        }
+        
+        setFormErrors({
+            ...formErrors, 
+            [name]: registerValidation(name, value)
         });
+        if ((name === 'password' && data.confirmPassword) || name === 'confirmPassword') {
+            const otherPassword = name === 'password' ? data.confirmPassword : data.password;
+            if (value !== otherPassword) {
+                setFormErrors(prev => ({
+                    ...prev,
+                    [name === 'password' ? 'confirmPassword' : name]: 'Passwords do not match'
+                }));
+            }
+        }
     }
 
     const handleSubmit = () => {
+        const newFormErrors = Object.keys(data)
+            .filter(key => key !== 'accountType')
+            .reduce((errors: {[key: string]: string}, key) => {
+                if (key === 'confirmPassword') {
+                    errors[key] = data[key] !== data['password'] ? 'Passwords do not match' : '';
+                } else {
+                    errors[key] = registerValidation(key, data[key]);
+                }
+                return errors;
+            }, {});
+
+        setFormErrors(newFormErrors);
+
+        if (Object.values(newFormErrors).some(error => error !== '')) {
+            return;
+        }
+
         registerUser(data)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(console.log)
+            .catch(console.log);
     }
 
     return (
@@ -51,6 +92,7 @@ const Register = () => {
             <TextInput 
                 value={data.name}
                 onChange={handleChange}
+                error={formErrors.name}
                 name="name"
                 withAsterisk
                 label="Full Name" 
@@ -59,6 +101,7 @@ const Register = () => {
             <TextInput 
                 value={data.email}
                 onChange={handleChange}
+                error={formErrors.email}
                 name="email"
                 withAsterisk 
                 leftSection={iconAt}
@@ -68,6 +111,7 @@ const Register = () => {
             <PasswordInput 
                 value={data.password}
                 onChange={handleChange}
+                error={formErrors.password}
                 name="password"
                 withAsterisk 
                 leftSection={iconLock} 
@@ -77,6 +121,7 @@ const Register = () => {
             <PasswordInput 
                 value={data.confirmPassword}
                 onChange={handleChange}
+                error={formErrors.confirmPassword}
                 name="confirmPassword"
                 withAsterisk 
                 leftSection={iconLock} 
