@@ -71,7 +71,7 @@ public class Data {
             .append("<h2>Verification Code</h2>")
             .append("<div class=\"message\">Hello ").append(name).append(", to complete your verification, please enter the following code:</div>")
             .append("<div class=\"otp-code\">").append(otp).append("</div>")
-            .append("<p>This code will expire in 10 minutes for security purposes.</p>")
+            .append("<p>This code will expire in 5 minutes for security purposes.</p>")
             .append("<p>If you didn't request this code, please disregard this email and contact support.</p>")
             .append("<div class=\"footer\">")
             .append("© 2024 JobFinder. All rights reserved.<br>")

@@ -1,11 +1,13 @@
 package com.jobfinder.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -85,7 +87,7 @@ public class DefaultUserService implements UserService {
     @Override
     public Boolean verifyOTP(String email, String otp) throws backendException {
         OTP otpEntity = otpRepository
-            .findOTPByEmail(email)
+            .findById(email)
             .orElseThrow(() -> new backendException("OTP_NOT_FOUND"));
         if (!otpEntity.getOTP().equals(otp)) {
             throw new backendException("OTP_INCORRECT");
@@ -102,5 +104,15 @@ public class DefaultUserService implements UserService {
         user.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
         userRepository.save(user);
         return new ResponseDTO("Password changed successfully");
+    }
+
+    @Scheduled(fixedRate = 6000)
+    public void removeExpiredOTP() {
+        List<OTP> expiredOTP = otpRepository.findByCreatedAtBefore(LocalDateTime.now().minusMinutes(5));
+        otpRepository.deleteAll(expiredOTP);
+        if (!expiredOTP.isEmpty()) {
+            otpRepository.deleteAll(expiredOTP);
+            System.out.printf("Removed %d expired OTPs", expiredOTP.size());
+        }
     }
 }

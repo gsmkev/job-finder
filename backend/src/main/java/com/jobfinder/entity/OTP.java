@@ -17,6 +17,6 @@ public class OTP {
     @Id
     private String email;
     private String OTP;
-    private LocalDateTime creationTime;
+    private LocalDateTime createdAt;
 
 }

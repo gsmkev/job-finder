@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.jobfinder.dto.AccountType;
 import com.jobfinder.entity.User;
@@ -14,6 +15,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication(scanBasePackages = "com.jobfinder")
 @EnableMongoRepositories(basePackages = "com.jobfinder.repository")
+@EnableScheduling
 public class BackendApplication {
 
 	public static void main(String[] args) {
