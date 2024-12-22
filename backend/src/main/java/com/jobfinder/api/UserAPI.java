@@ -50,13 +50,13 @@ public class UserAPI {
         return new ResponseEntity<>(userService.changePassword(loginDTO), HttpStatus.OK);
     }
 
-    @PostMapping("/sendOTP/{email}")
+    @PostMapping("/send-otp/{email}")
     public ResponseEntity<ResponseDTO> sendOTP(@PathVariable @Email(message = "{user.email.invalid}") String email) throws Exception {
         userService.sendOTP(email);
         return new ResponseEntity<>(new ResponseDTO("OTP sent successfully"), HttpStatus.OK);
     }
 
-    @GetMapping("/verifyOTP/{email}/{otp}")
+    @GetMapping("/verify-otp/{email}/{otp}")
     public ResponseEntity<ResponseDTO> verifyOTP(@PathVariable @Email(message = "{user.email.invalid}") String email, @PathVariable @Pattern(regexp = "^[0-9]{6}$", message = "{otp.incorrect}") String otp) throws Exception {
         userService.verifyOTP(email, otp);
         return new ResponseEntity<>(new ResponseDTO("OTP verified successfully"), HttpStatus.OK);
