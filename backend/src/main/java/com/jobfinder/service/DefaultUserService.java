@@ -66,22 +66,18 @@ public class DefaultUserService implements UserService {
 
     @Override
     public Boolean sendOTP(String email) throws Exception {
-        try {
-            User user = userRepository
-                .findUserByEmail(email)
-                .orElseThrow(() -> new backendException("USER_NOT_FOUND"));
-            MimeMessage message = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setTo(email);
-            helper.setSubject("Yout OTP for JobFinder");
-            OTP otp = new OTP(email, Utils.generateOTP(), LocalDateTime.now());
-            otpRepository.save(otp);
-            helper.setText(Data.getMessageBody(otp.getOTP(), user.getName()), true);
-            javaMailSender.send(message);
-            return true;
-        } catch (Exception e) {
-            throw new Exception("Failed to send OTP: " + e.getMessage());
-        }
+        User user = userRepository
+            .findUserByEmail(email)
+            .orElseThrow(() -> new backendException("USER_NOT_FOUND"));
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(email);
+        helper.setSubject("Yout OTP for JobFinder");
+        OTP otp = new OTP(email, Utils.generateOTP(), LocalDateTime.now());
+        otpRepository.save(otp);
+        helper.setText(Data.getMessageBody(otp.getOTP(), user.getName()), true);
+        javaMailSender.send(message);
+        return true;
     }
 
     @Override
