@@ -11,7 +11,7 @@ const getProfile = async (id: number) => {
 }
 
 const updateProfile = async (profile: any) => {
-    return axios.put(`${API_URL}/login`, profile)
+    return axios.put(`${API_URL}/update`, profile)
     .then(response => response.data)
     .catch(error => {
         throw error;
