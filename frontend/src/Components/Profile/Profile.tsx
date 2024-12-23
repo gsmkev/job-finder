@@ -2,18 +2,25 @@ import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
 import { IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./Certification/CertificationCard";
 import ExperienceCard from "./Experience/ExperienceCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SelectInput from "./SelectInput";
 import fields from "../../Data/Profile";
 import ExperienceInput from "./Experience/ExperienceInput";
 import CertificationInput from "./Certification/CertificationInput";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../Services/ProfileService";
+import { setProfile } from "../../Slices/ProfileSlice";
 
 const Profile = (props: any) => {
 
+    const dispatch = useDispatch();
+    const user = useSelector((state: any) => state.user);
+    const profile = useSelector((state: any) => state.profile);
+
     const [edit, setEdit] = useState([false, false, false, false, false]);
     const select = fields
-    const [about, setAbout] = useState(props.about);
-    const [skills, setSkills] = useState(props.skills);
+    const [about, setAbout] = useState(profile?.about);
+    const [skills, setSkills] = useState(profile?.skills);
     const [addExperience, setAddExperience] = useState(false);
     const [addCertificate, setAddCertificate] = useState(false);
 
@@ -34,6 +41,30 @@ const Profile = (props: any) => {
     const handleAddCertificate = () => {
         setAddCertificate(!addCertificate);
     }
+
+    useEffect(() => {
+        if (user.id) {
+            console.log("Fetching profile for user ID:", user.id);
+            getProfile(user.id)
+                .then((response: any) => {
+                    console.log("Profile fetched:", response);
+                    dispatch(setProfile(response));
+                })
+                .catch((error: any) => {
+                    console.log("Error fetching profile:", error);
+                });
+        }
+    }, [user.id, dispatch]);
+    
+    useEffect(() => {
+        if (profile?.about) {
+            console.log("Updating local state with profile data");
+            setAbout(profile.about);
+            setSkills(profile.skills);
+            
+            console.log("Profile: ", profile.about);
+        }
+    }, [profile]);
 
     return (
         <div className="w-4/5 mx-auto">
@@ -57,7 +88,7 @@ const Profile = (props: any) => {
                 
                 {/* Personal inofrmation section */}
                 <div className="text-3xl font-semibold flex justify-between">
-                    {props.name}
+                    {user?.name}
                     <ActionIcon 
                         onClick={() => handleEdit(0)}
                         variant="subtle" 
@@ -79,10 +110,10 @@ const Profile = (props: any) => {
                         <>
                             <div className="text-x flex gap-1 items-center">
                                 <IconBriefcase className="h-5 w-5" />
-                                {props.role} &bull; {props.company}
+                                {profile?.jobTitle} &bull; {profile?.company}
                             </div>
                             <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
-                                <IconMapPin className="h-5 w-5" stroke={1.5} /> {props.location}
+                                <IconMapPin className="h-5 w-5" stroke={1.5} /> {profile?.location}
                             </div>
                         </>
                 }
@@ -138,7 +169,7 @@ const Profile = (props: any) => {
                                 placeholder="Add your skills..."
                             /> :
                             <div className="flex flex-wrap gap-2">
-                                {props.skills.map((skill: any, index: any) => (
+                                {profile?.skills?.map((skill: any, index: any) => (
                                     <div
                                         key={index}
                                         className={`
@@ -183,7 +214,7 @@ const Profile = (props: any) => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-8">
-                        {!addExperience && props.experience.map((exp: any, index: any) => (
+                        {!addExperience && profile?.experiences?.map((exp: any, index: any) => (
                             <ExperienceCard 
                                 key={index} 
                                 {...exp}
@@ -219,7 +250,7 @@ const Profile = (props: any) => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-8">
-                        {!addCertificate && props.certifications.map((cert: any, index: any) => (
+                        {!addCertificate && profile?.certifications?.map((cert: any, index: any) => (
                             <CertificationCard 
                                 key={index} 
                                 {...cert}
