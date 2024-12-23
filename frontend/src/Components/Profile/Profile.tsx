@@ -1,15 +1,14 @@
 import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
-import { IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil, IconPlus } from "@tabler/icons-react";
+import { IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./Certification/CertificationCard";
 import ExperienceCard from "./Experience/ExperienceCard";
 import { useEffect, useState } from "react";
-import SelectInput from "./SelectInput";
-import fields from "../../Data/Profile";
 import ExperienceInput from "./Experience/ExperienceInput";
 import CertificationInput from "./Certification/CertificationInput";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../Services/ProfileService";
 import { setProfile } from "../../Slices/ProfileSlice";
+import PersonalSection from "./PersonalSection";
 
 const Profile = (props: any) => {
 
@@ -18,7 +17,6 @@ const Profile = (props: any) => {
     const profile = useSelector((state: any) => state.profile);
 
     const [edit, setEdit] = useState([false, false, false, false, false]);
-    const select = fields
     const [about, setAbout] = useState(profile?.about);
     const [skills, setSkills] = useState(profile?.skills);
     const [addExperience, setAddExperience] = useState(false);
@@ -86,37 +84,7 @@ const Profile = (props: any) => {
             </div>
             <div className="px-3 mt-16">
                 
-                {/* Personal inofrmation section */}
-                <div className="text-3xl font-semibold flex justify-between">
-                    {user?.name}
-                    <ActionIcon 
-                        onClick={() => handleEdit(0)}
-                        variant="subtle" 
-                        color="bright-sun.4"
-                        size="lg"
-                    >
-                        { edit[0] ? iconDeviceFloppy : iconPencil }
-                    </ActionIcon>
-                </div>
-                {
-                    edit[0] ? 
-                        <>
-                            <div className="flex gap-10 [&>*]:w-1/2">
-                                <SelectInput {...select[0]} edit={edit[1]} />
-                                <SelectInput {...select[1]} edit={edit[2]} />
-                            </div>
-                            <SelectInput {...select[2]} edit={edit[3]} />
-                        </> :
-                        <>
-                            <div className="text-x flex gap-1 items-center">
-                                <IconBriefcase className="h-5 w-5" />
-                                {profile?.jobTitle} &bull; {profile?.company}
-                            </div>
-                            <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
-                                <IconMapPin className="h-5 w-5" stroke={1.5} /> {profile?.location}
-                            </div>
-                        </>
-                }
+                <PersonalSection user={user} profile={profile} />
                 
                 {/* About section */}
                 <Divider my={'xl'} />
