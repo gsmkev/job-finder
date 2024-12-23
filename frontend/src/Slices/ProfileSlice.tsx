@@ -1,15 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getItem } from "../Services/LocalStorageService";
-import { updateProfile } from "../Services/ProfileService";
-
-const initialState = getItem("profile") || {};
 
 const ProfileSlice = createSlice({
     name: "profile",
-    initialState,
+    initialState: {},
     reducers: {
         changeProfile: (state, action) => {
-            return updateProfile(action.payload);
+            return { ...state, ...action.payload };
         },
         setProfile: (state, action) => {
             return action.payload;

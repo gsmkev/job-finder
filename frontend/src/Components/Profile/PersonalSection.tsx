@@ -4,10 +4,16 @@ import { IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil } from "@tabler
 import fields from "../../Data/Profile";
 import { useState } from "react";
 import { useForm } from "@mantine/form";
+import { updateProfile } from "../../Services/ProfileService";
+import { useDispatch } from "react-redux";
+import { changeProfile } from "../../Slices/ProfileSlice";
+import { notifications } from "@mantine/notifications";
 
 const PersonalSection = (props: any) => {
+    const dispatch = useDispatch();
     const select = fields;
     const [edit, setEdit] = useState(false);
+
     const form = useForm({
         mode: 'controlled',
         initialValues: {
@@ -16,16 +22,41 @@ const PersonalSection = (props: any) => {
             location: ''
         }
     });
-    const handleEdit = () => {
+
+    const handleEdit = async () => {
         if (!edit) {
             setEdit(true);
+            form.setValues({
+                jobTitle: props?.profile?.jobTitle,
+                company: props?.profile?.company,
+                location: props?.profile?.location
+            });
         } else {
-            console.log("form.getValues() ", form.getValues());
+            setEdit(false);
+            const updates = { ...props.profile, ...form.getValues() };
+            try {
+                const updatedProfile = await updateProfile(updates);
+                dispatch(changeProfile(updatedProfile));
+                notifications.show({
+                    title: 'Profile updated',
+                    message: 'Your profile has been updated successfully',
+                    color: 'teal',
+                    autoClose: 3000
+                })
+            } catch (error) {
+                console.error("Failed to update profile:", error);
+                notifications.show({
+                    title: 'Failed to update profile',
+                    message: 'An error occurred while updating your profile',
+                    color: 'red',
+                    autoClose: 3000
+                })
+            }
         }
     };
     return (
         <>
-        <div className="text-3xl font-semibold flex justify-between">
+            <div className="text-3xl font-semibold flex justify-between">
                 {props?.user?.name}
                 <ActionIcon 
                     onClick={handleEdit}
@@ -43,10 +74,22 @@ const PersonalSection = (props: any) => {
                 edit ? 
                     <>
                         <div className="flex gap-10 [&>*]:w-1/2">
-                            <SelectInput {...select[0]} />
-                            <SelectInput {...select[1]} />
+                            <SelectInput 
+                                form={form}
+                                name="jobTitle"
+                                {...select[0]} 
+                            />
+                            <SelectInput
+                                form={form}
+                                name="company"
+                                {...select[1]}
+                            />
                         </div>
-                        <SelectInput {...select[2]} />
+                        <SelectInput 
+                            form={form}
+                            name="location"
+                            {...select[2]} 
+                        />
                     </> :
                     <>
                         <div className="text-x flex gap-1 items-center">
