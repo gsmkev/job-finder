@@ -1,5 +1,7 @@
 package com.jobfinder.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class Certification {
     private String name;
     private String issuer;
-    private String issueDate;
+    private LocalDateTime issueDate;
     private String certificateId;
 }

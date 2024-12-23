@@ -28,7 +28,6 @@ public class UserDTO {
     private String password;
     @NotNull(message = "{user.accountType.null}")
     private AccountType accountType;
-    @NotNull(message = "{user.profile.null}")
     private Long profileId;
 
     public User toEntity() {
@@ -38,6 +37,7 @@ public class UserDTO {
         user.setEmail(email);
         user.setPassword(password);
         user.setAccountType(accountType);
+        user.setProfileId(profileId);
         return user;
     }
 }

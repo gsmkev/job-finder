@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import com.jobfinder.entity.Profile;
 import com.jobfinder.exception.backendException;
 import com.jobfinder.utility.Utils;
+import com.jobfinder.repository.ProfileRepository;
 
 @Service("profileService")
 public class DefaultProfileService implements ProfileService {
     
     @Autowired
-    private com.jobfinder.repository.ProfileRepository ProfileRepository;
+    private ProfileRepository profileRepository;
 
     @Override
     public Long createProfile(String email) throws backendException {
@@ -23,7 +24,7 @@ public class DefaultProfileService implements ProfileService {
         profile.setSkills(new ArrayList<>());
         profile.setExperiences(new ArrayList<>());
         profile.setCertifications(new ArrayList<>());
-        profile = ProfileRepository.save(profile);
+        profile = profileRepository.save(profile);
         return profile.getId();
     }
 
