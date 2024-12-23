@@ -8,9 +8,15 @@ import {
     IconLogout2
 } from '@tabler/icons-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { removeUser } from '../../Slices/UserSlice';
 
 const ProfileMenu = () => {
+
+    const dispatch = useDispatch();
+    const user = useSelector((state: any) => state.user);
+    const navigate = useNavigate();
 
     const [checked, setChecked] = useState(false);
     const [opened, setOpened] = useState(false);
@@ -31,11 +37,16 @@ const ProfileMenu = () => {
         onChange={(event) => setChecked(event.currentTarget.checked)}
     />;
 
+    const handleLogout = () => {
+        dispatch(removeUser());
+        navigate('/');
+    }
+
     return (
         <Menu opened={opened} onChange={setOpened} shadow="md" width={200}>
             <Menu.Target>
                 <div className={'flex cursor-pointer gap-3 items-center'}>
-                    <div>Kevin</div>
+                    <div>{user.name}</div>
                     <Avatar src="avatar1.png" alt="it's me" />
                 </div>
             </Menu.Target>
@@ -50,7 +61,13 @@ const ProfileMenu = () => {
                 <Menu.Item leftSection={iconFile}>Resume</Menu.Item>
                 <Menu.Item leftSection={iconMoon} rightSection={switchDarkMode}>Dark Mode</Menu.Item>
                 <Menu.Divider />
-                <Menu.Item color='red' leftSection={iconLogout}>Logout</Menu.Item>
+                <Menu.Item 
+                    color='red' 
+                    leftSection={iconLogout}
+                    onClick={handleLogout}
+                >
+                    Logout
+                </Menu.Item>
             </Menu.Dropdown>
         </Menu>
     );
