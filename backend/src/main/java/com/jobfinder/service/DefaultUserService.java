@@ -34,6 +34,9 @@ public class DefaultUserService implements UserService {
     private OTPRepository otpRepository;
 
     @Autowired
+    private ProfileService profileService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -45,6 +48,7 @@ public class DefaultUserService implements UserService {
         if (userOptional.isPresent()) {
             throw new backendException("USER_EMAIL_EXISTS");
         }
+        userDTO.setProfileId(profileService.createProfile(userDTO.getEmail()));
         userDTO.setId(Utils.getNextSequence("users"));
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User user = userDTO.toEntity();

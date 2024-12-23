@@ -23,6 +23,7 @@ public class User {
     private String email;
     private String password;
     private AccountType accountType;
+    private Long profileId;
 
     public UserDTO toDTO() {
         UserDTO userDTO = new UserDTO();
@@ -31,6 +32,7 @@ public class User {
         userDTO.setEmail(email);
         userDTO.setPassword(password);
         userDTO.setAccountType(accountType);
+        userDTO.setProfileId(profileId);
         return userDTO;
     }
 }
