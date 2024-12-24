@@ -1,4 +1,4 @@
-import { ActionIcon, Avatar, Divider, FileInput, Indicator, TagsInput } from "@mantine/core";
+import { ActionIcon, Avatar, Divider, FileInput, Indicator } from "@mantine/core";
 import { IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./Certification/CertificationCard";
 import ExperienceCard from "./Experience/ExperienceCard";
@@ -10,6 +10,7 @@ import { getProfile } from "../../Services/ProfileService";
 import { setProfile } from "../../Slices/ProfileSlice";
 import PersonalSection from "./PersonalSection";
 import AboutSection from "./AboutSection";
+import SkillsSection from "./SkillsSection";
 
 const Profile = (props: any) => {
 
@@ -18,7 +19,6 @@ const Profile = (props: any) => {
     const profile = useSelector((state: any) => state.profile);
 
     const [edit, setEdit] = useState([false, false, false, false, false]);
-    const [skills, setSkills] = useState(profile?.skills);
     const [addExperience, setAddExperience] = useState(false);
     const [addCertificate, setAddCertificate] = useState(false);
 
@@ -102,47 +102,9 @@ const Profile = (props: any) => {
 
                 <AboutSection profile={profile} />
                 
-                {/* Skills section */}
                 <Divider my={'xl'} />
-                <div className="px-3">
-                    <div className="text-2xl font-semibold mb-5 flex justify-between">
-                        Skills
-                        <ActionIcon 
-                            onClick={() => handleEdit(2)}
-                            variant="subtle" 
-                            color="bright-sun.4"
-                            size="lg"
-                        >
-                            { edit[2] ? iconDeviceFloppy : iconPencil }
-                        </ActionIcon>
-                    </div>
-                    {
-                        edit[2] ? 
-                            <TagsInput 
-                                value={skills}
-                                onChange={(value) => setSkills(value)}
-                                placeholder="Add your skills..."
-                            /> :
-                            <div className="flex flex-wrap gap-2">
-                                {profile?.skills?.map((skill: any, index: any) => (
-                                    <div
-                                        key={index}
-                                        className={`
-                                            bg-bright-sun-300 
-                                            bg-opacity-15 
-                                            rounded-3xl 
-                                            px-3 
-                                            py-1 
-                                            text-bright-sun-400 
-                                            text-sm 
-                                            font-medium
-                                        `}>
-                                        {skill}
-                                    </div>
-                                ))}
-                            </div>
-                    }
-                </div>
+                
+                <SkillsSection profile={profile} />
                 
                 {/* Experience section */}
                 <Divider my={'xl'} />
