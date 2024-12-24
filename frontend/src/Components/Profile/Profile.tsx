@@ -1,4 +1,4 @@
-import { ActionIcon, Avatar, Divider, FileInput, Indicator, TagsInput, Textarea } from "@mantine/core";
+import { ActionIcon, Avatar, Divider, FileInput, Indicator, TagsInput } from "@mantine/core";
 import { IconDeviceFloppy, IconPencil, IconPlus } from "@tabler/icons-react";
 import CertificationCard from "./Certification/CertificationCard";
 import ExperienceCard from "./Experience/ExperienceCard";
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../Services/ProfileService";
 import { setProfile } from "../../Slices/ProfileSlice";
 import PersonalSection from "./PersonalSection";
+import AboutSection from "./AboutSection";
 
 const Profile = (props: any) => {
 
@@ -17,7 +18,6 @@ const Profile = (props: any) => {
     const profile = useSelector((state: any) => state.profile);
 
     const [edit, setEdit] = useState([false, false, false, false, false]);
-    const [about, setAbout] = useState(profile?.about);
     const [skills, setSkills] = useState(profile?.skills);
     const [addExperience, setAddExperience] = useState(false);
     const [addCertificate, setAddCertificate] = useState(false);
@@ -42,27 +42,14 @@ const Profile = (props: any) => {
 
     useEffect(() => {
         if (user.id) {
-            console.log("Fetching profile for user ID:", user.id);
             getProfile(user.id)
-                .then((response: any) => {
-                    console.log("Profile fetched:", response);
-                    dispatch(setProfile(response));
-                })
-                .catch((error: any) => {
-                    console.log("Error fetching profile:", error);
-                });
+            .then((response: any) => {
+                dispatch(setProfile(response));
+            })
+            .catch((error: any) => {
+            });
         }
     }, [user.id, dispatch]);
-    
-    useEffect(() => {
-        if (profile?.about) {
-            console.log("Updating local state with profile data");
-            setAbout(profile.about);
-            setSkills(profile.skills);
-            
-            console.log("Profile: ", profile.about);
-        }
-    }, [profile]);
 
     return (
         <div className="w-4/5 mx-auto">
@@ -111,34 +98,9 @@ const Profile = (props: any) => {
                 
                 <PersonalSection user={user} profile={profile} />
                 
-                {/* About section */}
                 <Divider my={'xl'} />
-                <div className="px-3">
-                    <div className="text-2xl font-semibold mb-5 flex justify-between">
-                        About
-                        <ActionIcon 
-                            onClick={() => handleEdit(1)}
-                            variant="subtle" 
-                            color="bright-sun.4"
-                            size="lg"
-                        >
-                            { edit[1] ?  iconDeviceFloppy : iconPencil }
-                        </ActionIcon>
-                    </div>
-                    {
-                        edit[1] ? 
-                                <Textarea 
-                                    value={about}
-                                    onChange={(event) => setAbout(event.currentTarget.value)}
-                                    minRows={3}
-                                    autosize
-                                    placeholder="Write something about yourself..."
-                                /> :
-                            <div className="text-sm text-mine-shaft-300 text-justify">
-                                {about}
-                            </div>
-                    }
-                </div>
+
+                <AboutSection profile={profile} />
                 
                 {/* Skills section */}
                 <Divider my={'xl'} />
