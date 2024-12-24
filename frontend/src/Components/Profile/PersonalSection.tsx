@@ -1,6 +1,12 @@
 import { ActionIcon } from "@mantine/core";
 import SelectInput from "./SelectInput";
-import { IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil } from "@tabler/icons-react";
+import { 
+    IconBriefcase, 
+    IconCheck, 
+    IconMapPin, 
+    IconPencil, 
+    IconX 
+} from "@tabler/icons-react";
 import fields from "../../Data/Profile";
 import { useState } from "react";
 import { useForm } from "@mantine/form";
@@ -58,17 +64,29 @@ const PersonalSection = (props: any) => {
         <>
             <div className="text-3xl font-semibold flex justify-between">
                 {props?.user?.name}
-                <ActionIcon 
-                    onClick={handleEdit}
-                    variant="subtle" 
-                    color="bright-sun.4"
-                    size="lg"
-                >
-                    { edit ? 
-                        <IconDeviceFloppy className={'h-4/5 w-4/5'} /> : 
-                        <IconPencil className={'h-4/5 w-4/5'} /> 
+                <div className="flex gap-2">
+                    <ActionIcon 
+                        onClick={handleEdit}
+                        variant="subtle" 
+                        color= {edit ? 'green.8' : 'bright-sun.4'}
+                        size="lg"
+                    >
+                        { edit ? 
+                            <IconCheck className={'h-4/5 w-4/5'} /> : 
+                            <IconPencil className={'h-4/5 w-4/5'} /> 
+                        }
+                    </ActionIcon>
+                    { edit && 
+                        <ActionIcon
+                            onClick={() => setEdit(false)}
+                            variant="subtle" 
+                            color="red.8"
+                            size="lg"
+                        >
+                            <IconX className={'h-4/5 w-4/5'} />
+                        </ActionIcon>
                     }
-                </ActionIcon>
+                </div>
             </div>
             {
                 edit ? 
